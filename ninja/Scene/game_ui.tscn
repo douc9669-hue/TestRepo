@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=3 uid="uid://ck6y1inqwes6e"]
+
+[ext_resource type="Script" uid="uid://bnjtpi8ijkrux" path="res://Scripts/game_ui.gd" id="1_game_ui"]
+[ext_resource type="Texture2D" uid="uid://uu31px2w1eh1" path="res://Assets/textures/Coins/Coin (1).png" id="2_a5i32"]
+[ext_resource type="Texture2D" uid="uid://b2lfdyvqrlep5" path="res://Assets/textures/heart.png" id="3_a5i32"]
+
+[node name="GameUI" type="CanvasLayer"]
+script = ExtResource("1_game_ui")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 1132.0
+offset_bottom = 65.0
+size_flags_vertical = 0
+theme_override_constants/separation = 40
+
+[node name="Coin" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Coin"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_a5i32")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CoinLabel" type="Label" parent="HBoxContainer/Coin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "9999"
+
+[node name="Heart" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Heart"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("3_a5i32")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HealthBar" type="ProgressBar" parent="HBoxContainer/Heart"]
+custom_minimum_size = Vector2(200, 32)
+layout_mode = 2
+value = 100.0
+show_percentage = false
+
+[node name="HealthLabel" type="Label" parent="HBoxContainer/Heart"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "100/100"
+
+[node name="TimerLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "Time: 0:00"

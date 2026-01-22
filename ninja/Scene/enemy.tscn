@@ -1,0 +1,100 @@
+[gd_scene load_steps=12 format=3 uid="uid://bsayenhvfm4s4"]
+
+[ext_resource type="Script" uid="uid://cbowrd8y0g54r" path="res://Scripts/enemy.gd" id="1_4jekx"]
+[ext_resource type="Texture2D" uid="uid://dx5nile8g2noq" path="res://Assets/textures/enemy.png" id="1_yww8s"]
+[ext_resource type="Script" uid="uid://btk0tk6qawqid" path="res://Scripts/State/Enemy/state_machine.gd" id="2_state_machine"]
+[ext_resource type="Script" uid="uid://4kscim47tr45" path="res://Scripts/State/Enemy/patrol.gd" id="3_patrol"]
+[ext_resource type="Script" uid="uid://etq7tmyav41j" path="res://Scripts/State/Enemy/chase.gd" id="4_chase"]
+[ext_resource type="Script" uid="uid://bhqsv48p5mju6" path="res://Scripts/State/Enemy/attack.gd" id="5_attack"]
+[ext_resource type="Script" uid="uid://co4cd7cdrmd7m" path="res://Scripts/State/Enemy/death.gd" id="6_death"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yww8s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_yww8s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4jekx"]
+radius = 188.0
+height = 424.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vmi60"]
+radius = 147.27525
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s685e"]
+radius = 196.04082
+
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
+collision_layer = 16
+collision_mask = 7
+script = ExtResource("1_4jekx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_yww8s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CapsuleShape2D_4jekx")
+
+[node name="Attack" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
+shape = SubResource("CircleShape2D_vmi60")
+
+[node name="Detection" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection"]
+shape = SubResource("CircleShape2D_s685e")
+
+[node name="Rays" type="Node2D" parent="."]
+
+[node name="RightEdgeRay" type="RayCast2D" parent="Rays"]
+position = Vector2(100, 0)
+target_position = Vector2(0, 150)
+collision_mask = 4
+
+[node name="LeftEdgeRay" type="RayCast2D" parent="Rays"]
+position = Vector2(-100, 0)
+target_position = Vector2(0, 150)
+collision_mask = 4
+
+[node name="RightWallRay" type="RayCast2D" parent="Rays"]
+target_position = Vector2(100, 0)
+collision_mask = 4
+
+[node name="LeftWallRay" type="RayCast2D" parent="Rays"]
+target_position = Vector2(-100, 0)
+collision_mask = 4
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_state_machine")
+initial_state = NodePath("Patrol")
+
+[node name="Patrol" type="Node" parent="StateMachine"]
+script = ExtResource("3_patrol")
+
+[node name="Chase" type="Node" parent="StateMachine"]
+script = ExtResource("4_chase")
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("5_attack")
+
+[node name="Timer" type="Timer" parent="StateMachine/Attack"]
+
+[node name="Death" type="Node" parent="StateMachine"]
+script = ExtResource("6_death")
+
+[connection signal="body_entered" from="Attack" to="." method="_on_attack_body_entered"]
+[connection signal="body_exited" from="Attack" to="." method="_on_attack_body_exited"]
+[connection signal="body_entered" from="Detection" to="." method="_on_detection_body_entered"]
+[connection signal="body_exited" from="Detection" to="." method="_on_detection_body_exited"]
+[connection signal="timeout" from="StateMachine/Attack/Timer" to="StateMachine/Attack" method="_on_timer_timeout"]

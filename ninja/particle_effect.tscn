@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://2ffmlbpgjykg"]
+
+[ext_resource type="Texture2D" uid="uid://b3lc88lhybd8k" path="res://Assets/textures/Particle/Line1.png" id="1_qqcsq"]
+
+[sub_resource type="Gradient" id="Gradient_el1iy"]
+offsets = PackedFloat32Array(0.007029877, 0.19683656, 0.5536028, 0.9789104)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.50731444, 0.50731444, 0.5073144, 1, 0.7019608, 0.7019608, 0.7019608, 0.011764706)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xw5u7"]
+gradient = SubResource("Gradient_el1iy")
+width = 100
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_newul"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 150.0
+emission_ring_inner_radius = 73.53
+emission_ring_cone_angle = 90.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -200.0
+radial_accel_max = -2.2351742e-06
+scale_min = 4.0
+scale_max = 4.0
+color_ramp = SubResource("GradientTexture1D_xw5u7")
+hue_variation_min = -2.2351742e-08
+hue_variation_max = 0.99999994
+
+[node name="ParticleEffect" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 100
+texture = ExtResource("1_qqcsq")
+speed_scale = 4.0
+process_material = SubResource("ParticleProcessMaterial_newul")

@@ -1,0 +1,144 @@
+[gd_scene load_steps=2 format=3 uid="uid://foi7su2yl00g"]
+
+[ext_resource type="Script" uid="uid://d0kb3nd3yu6hg" path="res://Scripts/instructions.gd" id="1_instructions"]
+
+[node name="Instructions" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_instructions")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.9)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.0
+offset_top = -350.0
+offset_right = 450.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 72
+text = "HOW TO PLAY"
+horizontal_alignment = 1
+
+[node name="Spacer1" type="Control" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ControlsLabel" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.8, 1, 1)
+theme_override_font_sizes/font_size = 42
+text = "CONTROLS"
+horizontal_alignment = 1
+
+[node name="ControlsText" type="Label" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 28
+text = "Arrow Keys / A/D - Move
+Space / Up Arrow - Jump
+Space - Attack
+ESC - Pause"
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="Spacer2" type="Control" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="ObjectivesLabel" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.8, 1, 1)
+theme_override_font_sizes/font_size = 42
+text = "OBJECTIVES"
+horizontal_alignment = 1
+
+[node name="ObjectivesText" type="Label" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 28
+text = "• Collect coins
+• Avoid hazards
+• Defeat enemies
+• Reach the end!"
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="Spacer3" type="Control" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="HazardsLabel" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.5, 0.5, 1)
+theme_override_font_sizes/font_size = 42
+text = "WATCH OUT!"
+horizontal_alignment = 1
+
+[node name="HazardsText" type="Label" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 28
+text = "• Spikes - Damage on contact
+• Quicksand - Sinks you
+• Enemies - Attack nearby
+• Falling Platforms - Drop quickly"
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="Spacer4" type="Control" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="TipsLabel" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 1, 0.5, 1)
+theme_override_font_sizes/font_size = 42
+text = "TIPS"
+horizontal_alignment = 1
+
+[node name="TipsText" type="Label" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 28
+text = "• Watch your health bar
+• Collect coins for score
+• Jump off falling platforms fast
+• You respawn if you die"
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="Spacer5" type="Control" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "BACK TO MENU"
+
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

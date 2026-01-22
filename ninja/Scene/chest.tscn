@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcmqmyo1jt0tb"]
+
+[ext_resource type="Texture2D" uid="uid://3cu6he1qxwv4" path="res://Assets/textures/Chest (1).png" id="1_if2wm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gw8v6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_if2wm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_imxax"]
+size = Vector2(107, 79)
+
+[node name="Chest" type="Area2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.3, 1.3)
+sprite_frames = SubResource("SpriteFrames_gw8v6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -0.5)
+scale = Vector2(1.3, 1.3)
+shape = SubResource("RectangleShape2D_imxax")

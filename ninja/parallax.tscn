@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://q8aeuvjbe6tn"]
+
+[ext_resource type="PackedScene" uid="uid://c110pydriq3b7" path="res://parallax_layer.tscn" id="1_6axp4"]
+[ext_resource type="Script" uid="uid://bcid6p5kv0qeq" path="res://character_body_2d.gd" id="3_ykc37"]
+[ext_resource type="Texture2D" uid="uid://qfyak8aeok6n" path="res://Assets/Sprite/idle-removebg-preview.png" id="4_k2yd5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ji414"]
+
+[node name="Parallax" type="Node2D"]
+
+[node name="ParallaxLayer" parent="." instance=ExtResource("1_6axp4")]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(134, 819)
+script = ExtResource("3_ykc37")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+limit_bottom = 950
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(0, -3)
+texture = ExtResource("4_k2yd5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_ji414")

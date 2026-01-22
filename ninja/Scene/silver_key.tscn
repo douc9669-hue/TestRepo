@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bk8c5hnpgffbl"]
+
+[ext_resource type="Script" uid="uid://cyl1xpednr3mp" path="res://Scripts/silver_key.gd" id="1_5q5mm"]
+[ext_resource type="Texture2D" uid="uid://rpn3q7olcs5s" path="res://Assets/textures/Key silver.png" id="1_kpqil"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5q5mm"]
+radius = 28.284273
+height = 123.03659
+
+[node name="SilverKey" type="Area2D"]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_5q5mm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_kpqil")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 0.7853982
+shape = SubResource("CapsuleShape2D_5q5mm")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
